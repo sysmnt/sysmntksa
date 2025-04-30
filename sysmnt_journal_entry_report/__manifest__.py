@@ -8,7 +8,7 @@
     'summary': 'Custom Journal Entry PDF Report',
     'description': 'Professional custom layout for journal entry reports.',
     'author': "SYSMNT",
-    'website': "http://www.sysmnt.com",
+    'website': "https://www.sysmnt.com",
     'depends': ['account'],
     "images": [
         'static/description/icon.png'
@@ -17,8 +17,8 @@
         'report/report_journal_entries.xml',
         'report/report_journal_entries_view.xml',
     ],
-    'price': 000,
-    'currency': 'EUR',
+    'price': 25.50,
+    'currency': 'USD',
     'installable': True,
     'application': False,
 }
