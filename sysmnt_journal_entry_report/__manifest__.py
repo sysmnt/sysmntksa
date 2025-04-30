@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Part of Sysmnt. See LICENSE file for full copyright and licensing details.
 {
-    'name': 'Journal Entry Report PDF (Arabic & English)',
+    'name': 'Print Journal Entry Report PDF (Arabic & English)',
     'version': '17.0.0.0',
     'category': 'Accounting',
     'license': 'OPL-1',
@@ -17,7 +17,7 @@
         'report/report_journal_entries.xml',
         'report/report_journal_entries_view.xml',
     ],
-    'price': 25.50,
+    'price': 12.50,
     'currency': 'USD',
     'installable': True,
     'application': False,
