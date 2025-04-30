@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Enhanced Journal Entry Report Template -->
+        <template id="journal_entry_template_report_view">
+            <t t-call="web.external_layout">
+                <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
+                <div class="page">
+                    <div class="text-center">
+                        <h2 class="mb-3" style="font-size: 22px; text-transform: uppercase; letter-spacing: 1px;">Journal Entry / قيد اليومية</h2>
+                    </div>
+
+                    <table class="table table-sm mt-2" style="width: 100%; border: 1px solid #ccc;">
+                        <tbody>
+                            <tr>
+                                <td style="width: 20%;"><strong>Journal Entry / رقم القيد:</strong></td>
+                                <td><span t-field="o.name"/></td>
+                                <td style="width: 20%;"><strong>Journal / دفتر اليومية:</strong></td>
+                                <td><span t-field="o.journal_id"/></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Date / التاريخ:</strong></td>
+                                <td><span t-field="o.date"/></td>
+                                <td><strong>Reference / المرجع:</strong></td>
+                                <td><span t-field="o.ref"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 class="mt-4 mb-2 text-center">Journal Items / تفاصيل القيد</h4>
+                    <table class="table table-bordered table-sm" style="width: 100%; font-size: 12px;">
+                        <thead style="background-color: #f2f2f2;">
+                            <tr>
+                                <th>Partner / شريك</th>
+                                <th>Account / حساب</th>
+                                <th>Label / وصف</th>
+                                <th>Due Date / تاريخ الاستحقاق</th>
+                                <th>Analytic Account / حساب تحليلي</th>
+                                <th>Taxes(%) / الضرائب(%)</th>
+                                <th class="text-end">Debit / مدين</th>
+                                <th class="text-end">Credit / دائن</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="total" t-value="0.0"/>
+                            <t t-set="total1" t-value="0.0"/>
+                            <t t-foreach="o.line_ids" t-as="line">
+                                <tr>
+                                    <td><span t-field="line.partner_id"/></td>
+                                    <td><span t-field="line.account_id"/></td>
+                                    <td><span t-field="line.name"/></td>
+                                    <td><span t-field="line.date_maturity"/></td>
+                                    <td>
+										<span>
+											<div t-foreach="line.analytic_distribution" t-as="distribution">
+												<t t-set="distributions" t-value="distribution.split(',')"/>
+												<t t-foreach="distributions" t-as="dist">
+													<t t-if="line.env['account.analytic.account'].browse(int(dist))[0].partner_id">
+														<t t-esc="line.env['account.analytic.account'].browse(int(dist))[0].name"/>- 
+														<t t-esc="line.env['account.analytic.account'].browse(int(dist))[0].partner_id.name"/>, 
+														<t t-esc="line.analytic_distribution.get(dist)"/>
+													</t>
+													<t t-else="">
+														<t t-esc="line.env['account.analytic.account'].browse(int(dist))[0].name"/>,
+														<t t-esc="line.analytic_distribution.get(dist)"/>
+													</t>
+													<br/>
+												</t>
+											</div>
+										</span>
+									</td>
+                                    <td><span t-field="line.tax_ids"/></td>
+                                    <td class="text-end"><span t-field="line.debit"/></td>
+                                    <td class="text-end"><span t-field="line.credit"/></td>
+                                </tr>
+                                <t t-set="total" t-value="total + line.debit"/>
+                                <t t-set="total1" t-value="total1 + line.credit"/>
+                            </t>
+                        </tbody>
+                        <tfoot style="background: #f9f9f9;">
+                            <tr>
+                                <td colspan="6" class="text-start"><strong>Total / الإجمالي:</strong></td>
+                                <td class="text-end"><strong><t t-esc="total"/></strong></td>
+                                <td class="text-end"><strong><t t-esc="total1"/></strong></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </t>
+        </template>
+
+        <!-- Wrapper Template -->
+        <template id="journal_entry_report_template_id">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="sysmnt_journal_entry_report.journal_entry_template_report_view" t-lang="o.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+
+        
+
+    </data>
+</odoo>
