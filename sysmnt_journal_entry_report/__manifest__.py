@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Part of Sysmnt. See LICENSE file for full copyright and licensing details.
 {
-    'name': 'Sysmnt Journal Entry Report',
+    'name': 'Journal Entry Report PDF (Arabic & English)',
     'version': '17.0.0.0',
     'category': 'Accounting',
     'license': 'OPL-1',
