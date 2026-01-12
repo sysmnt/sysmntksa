@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- Inherit Attachment Form View to add OneDrive fields -->
+    <record id="view_attachment_form_inherit_onedrive" model="ir.ui.view">
+        <field name="name">ir.attachment.form.onedrive</field>
+        <field name="model">ir.attachment</field>
+        <field name="inherit_id" ref="base.view_attachment_form"/>
+        <field name="arch" type="xml">
+            
+            <!-- Add OneDrive fields after mimetype field -->
+            <xpath expr="//field[@name='mimetype']" position="after">
+                <field name="is_onedrive" invisible="1"/>
+                <field name="onedrive_file_id" readonly="1" invisible="not is_onedrive"/>
+                <field name="onedrive_path" readonly="1" invisible="not is_onedrive"/>
+                <field name="onedrive_web_url" readonly="1" widget="url" invisible="not is_onedrive"/>
+            </xpath>
+            
+        </field>
+    </record>
+    
+    <!-- Inherit Attachment Tree View to show OneDrive indicator -->
+    <record id="view_attachment_tree_inherit_onedrive" model="ir.ui.view">
+        <field name="name">ir.attachment.tree.onedrive</field>
+        <field name="model">ir.attachment</field>
+        <field name="inherit_id" ref="base.view_attachment_tree"/>
+        <field name="arch" type="xml">
+            
+            <!-- Add OneDrive column -->
+            <xpath expr="//field[@name='create_date']" position="after">
+                <field name="is_onedrive" string="OneDrive" widget="boolean"/>
+            </xpath>
+            
+        </field>
+    </record>
+
+</odoo>

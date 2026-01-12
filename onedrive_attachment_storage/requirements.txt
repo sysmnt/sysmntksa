@@ -1,0 +1,21 @@
+# Module requirements
+# These dependencies are typically included with Odoo
+# This file is for reference only
+
+# Core dependencies (included with Odoo)
+requests>=2.31.0
+python-dateutil>=2.8.2
+
+# Optional for enhanced features
+# certifi>=2023.7.22  # For SSL certificate verification
+# urllib3>=2.0.7  # HTTP client (used by requests)
+
+# Development dependencies (optional)
+# pytest>=7.4.0  # For running tests
+# pytest-odoo>=0.8.0  # Odoo-specific pytest plugin
+# pylint>=2.17.0  # Code quality
+# black>=23.7.0  # Code formatting
+
+# Note: Odoo 17 requires Python 3.10 or higher
+# Ensure your environment meets this requirement:
+# python --version  # Should show 3.10.x or higher
