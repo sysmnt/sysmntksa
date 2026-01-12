@@ -58,7 +58,7 @@
     'author': 'SYSMNT',
     'website': 'https://www.sysmnt.com',
     'license': 'OPL-1',
-    'price': 199.00,
+    'price': 250.00,
     'currency': 'USD',
     'support': 'info@sysmnt.com',
     'images': [
@@ -81,3 +81,4 @@
     'application': True,
     'auto_install': False,
 }
+
